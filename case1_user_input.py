@@ -12,7 +12,17 @@ def sum_and_count_positive(arr):
 
 
 def input_array():
-    """Функция ввода элементов пользователем."""
+    """Функция ввода данных пользователем."""
+    while True:
+        try:
+            n = int(input("Введите размерность массива: "))
+            if n <= 0:
+                print("Размерность должна быть положительным числом!\n")
+                continue
+            break
+        except ValueError:
+            print("Ошибка! Введите целое число для размерности.\n")
+    
     while True:
         try:
             user_input = input("Введите элементы массива через пробел: ")
@@ -20,7 +30,7 @@ def input_array():
             # замена ,
             user_input = user_input.replace(",", ".")
             
-            # Каст значения в список float
+            # Каст в список float
             arr = [float(x) for x in user_input.split()]
             return arr
         except ValueError:
