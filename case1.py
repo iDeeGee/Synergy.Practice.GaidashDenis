@@ -9,10 +9,40 @@ def sum_and_count_positive(arr):
     
     return sum_pos, count_pos
 
-# Пример 
-# if __name__ == "__main__":
-A = [1, -3, 5, 0, 7, -2]
-total_sum_pos, count_pos = sum_and_count_positive(A)
-print(f"Сумма положительных элементов: {total_sum_pos}")
-print(f"Количество положительных элементов: {count_pos}")
 
+# Тесты
+
+# пустой
+N = []
+total_sum_pos, total_count_pos = sum_and_count_positive(N)
+print(f"Сумма положительных элементов: {total_sum_pos}")
+print(f"Количество положительных элементов: {total_count_pos}")
+print("***********************")
+
+# все -
+N = [-1, -2.5, -3]
+total_sum_pos, total_count_pos = sum_and_count_positive(N)
+print(f"Сумма положительных элементов: {total_sum_pos}")
+print(f"Количество положительных элементов: {total_count_pos}")
+print("***********************")
+
+# все +
+N = [2, 3, 1.5]
+total_sum_pos, total_count_pos = sum_and_count_positive(N)
+print(f"Сумма положительных элементов: {total_sum_pos}")
+print(f"Количество положительных элементов: {total_count_pos}")
+print("***********************")
+
+# c 0
+N = [0, -1, 0, -2]
+total_sum_pos, total_count_pos = sum_and_count_positive(N)
+print(f"Сумма положительных элементов: {total_sum_pos}")
+print(f"Количество положительных элементов: {total_count_pos}")
+print("***********************")
+
+# cмешанные
+N = [-1, 2, 0, 4]
+total_sum_pos, total_count_pos = sum_and_count_positive(N)
+print(f"Сумма положительных элементов: {total_sum_pos}")
+print(f"Количество положительных элементов: {total_count_pos}")
+print("***********************")

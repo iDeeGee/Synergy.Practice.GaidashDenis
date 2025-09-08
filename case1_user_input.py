@@ -15,30 +15,30 @@ def input_array():
     """Функция ввода данных пользователем."""
     while True:
         try:
-            n = int(input("Введите размерность массива: "))
-            if n <= 0:
-                print("Размерность должна быть положительным числом!\n")
+            N = int(input("Введите размерность массива: "))
+            if N <= 0:
+                print("Размерность должна быть положительной!\n")
                 continue
             break
         except ValueError:
-            print("Ошибка! Введите целое число для размерности.\n")
+            print("Ошибка! Введите целое число для размерности!.\n")
     
     while True:
         try:
-            user_input = input("Введите элементы массива через пробел: ")
+            N_elements = input("Введите элементы массива через пробел: ")
             
             # замена ,
-            user_input = user_input.replace(",", ".")
+            N_elements  = N_elements .replace(",", ".")
             
             # Каст в список float
-            arr = [float(x) for x in user_input.split()]
+            arr = [float(x) for x in N_elements.split()]
             return arr
         except ValueError:
             print("Ошибка! Введите число или дробь.\n")
 
 
 if __name__ == "__main__":
-    Result = input_array()
-    total_sum_pos, count_pos = sum_and_count_positive(Result)
+    A = input_array()
+    total_sum_pos, count_pos = sum_and_count_positive(A)
     print(f"Сумма положительных элементов: {total_sum_pos}")
     print(f"Количество положительных элементов: {count_pos}")
