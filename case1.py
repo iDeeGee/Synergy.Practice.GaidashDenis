@@ -3,6 +3,9 @@ def sum_and_count_positive(arr):
     count_pos = 0
     
     for i in arr:
+ #       if not isinstance(i, (int, float)) or isinstance(i, bool):
+ #           raise TypeError(f"Тип элемента: {type(i).__name__}. Ожидалось число. Проверьте: {repr(i)}")
+        
         if i > 0:
             sum_pos += i
             count_pos += 1
@@ -46,3 +49,4 @@ total_sum_pos, total_count_pos = sum_and_count_positive(N)
 print(f"Сумма положительных элементов: {total_sum_pos}")
 print(f"Количество положительных элементов: {total_count_pos}")
 print("***********************")
+
