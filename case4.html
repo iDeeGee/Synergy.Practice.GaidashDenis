@@ -62,6 +62,48 @@
     </div>
 
     <script>
+         function calculate() {
+            const input = document.getElementById("dateInput").value;
+            const daysDiv = document.getElementById("daysResult");
+            const leapDiv = document.getElementById("leapResult");
+
+            // Парсим дату
+            const parts = input.split('.');
+            if (parts.length !== 3) {
+                daysDiv.textContent = "Ошибка! Формат должен быть дд.мм.гггг";
+                leapDiv.textContent = "";
+                return;
+            }
+
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+
+            if (isNaN(day) || isNaN(month) || isNaN(year) || day < 1 || day > 31 || month < 1 || month > 12) {
+                daysDiv.textContent = "Ошибка! Некорректная дата";
+                leapDiv.textContent = "";
+                return;
+            }
+
+            const inputDate = new Date(year, month - 1, day); 
+            const newYearDate = new Date(year, 11, 31); // 31 декабря текущего года
+
+            // Количество дней до НГ
+            const diffTime = newYearDate - inputDate;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            daysDiv.textContent = `Дней до Нового года: ${diffDays}`;
+
+            // Проверка на високосный год
+            let leapText = "";
+            if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+                leapText = "Год високосный";
+            } else {
+                leapText = "Год не високосный";
+            }
+
+            leapDiv.textContent = leapText;
+        }
         
     </script>
 </body>
