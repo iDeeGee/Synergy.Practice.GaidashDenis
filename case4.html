@@ -50,6 +50,11 @@
             margin-top: 15px;
             font-size: 18px;
         }
+
+        .error {
+            color: #d32f2f;
+        }
+
     </style>
 </head>
 <body>
@@ -62,49 +67,84 @@
     </div>
 
     <script>
-         function calculate() {
-            const input = document.getElementById("dateInput").value;
-            const daysDiv = document.getElementById("daysResult");
-            const leapDiv = document.getElementById("leapResult");
+    function formatDate(input){
+      let s = (input || "").trim();
+      // добавляем точки
+      if(!s.includes(".") && /^\d{8}$/.test(s)){
+        s = s.slice(0,2) + "." + s.slice(2,4) + "." + s.slice(4);
+      }
+      return s;
+    }
 
-            // Парсим дату
-            const parts = input.split('.');
-            if (parts.length !== 3) {
-                daysDiv.textContent = "Ошибка! Формат должен быть дд.мм.гггг";
-                leapDiv.textContent = "";
-                return;
-            }
+    function showFormatError(){
+      const daysDiv = document.getElementById("daysResult");
+      const leapDiv = document.getElementById("leapResult");
+      daysDiv.innerHTML = `<span class="error"><strong>Ошибка!</strong></span> Формат должен быть <strong>дд.мм.гггг</strong>`;
+      leapDiv.textContent = "";
+    }
 
-            const day = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10);
-            const year = parseInt(parts[2], 10);
+    function showDateError(){
+      const daysDiv = document.getElementById("daysResult");
+      const leapDiv = document.getElementById("leapResult");
+      daysDiv.innerHTML = `<span class="error"><strong>Ошибка!</strong></span> Некорректная дата`;
+      leapDiv.textContent = "";
+    }
 
-            if (isNaN(day) || isNaN(month) || isNaN(year) || day < 1 || day > 31 || month < 1 || month > 12) {
-                daysDiv.textContent = "Ошибка! Некорректная дата";
-                leapDiv.textContent = "";
-                return;
-            }
+    function isLeapYear(year){
+      return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    }
 
-            const inputDate = new Date(year, month - 1, day); 
-            const newYearDate = new Date(year, 11, 31); // 31 декабря текущего года
+    function calculate(){
+      const inputEl = document.getElementById("dateInput");
+      const daysDiv  = document.getElementById("daysResult");
+      const leapDiv  = document.getElementById("leapResult");
 
-            // Количество дней до НГ
-            const diffTime = newYearDate - inputDate;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const formatted = formatDate(inputEl.value);
+      inputEl.value = formatted; // показываем отформат. дату
 
-            daysDiv.textContent = `Дней до Нового года: ${diffDays}`;
+      const parts = formatted.split(".");
+      if(parts.length !== 3 || parts.some(p => p.length === 0)){
+        showFormatError();
+        return;
+      }
 
-            // Проверка на високосный год
-            let leapText = "";
-            if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
-                leapText = "Год високосный";
-            } else {
-                leapText = "Год не високосный";
-            }
+      const day   = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10);
+      const year  = parseInt(parts[2], 10);
 
-            leapDiv.textContent = leapText;
-        }
-        
-    </script>
+      // проверка диапазонов
+      if(
+        Number.isNaN(day) || Number.isNaN(month) || Number.isNaN(year) ||
+        day < 1 || day > 31 || month < 1 || month > 12
+      ){
+        showDateError();
+        return;
+      }
+
+      // строгая проверка даты
+      const inputDate = new Date(year, month - 1, day);
+      if(
+        inputDate.getFullYear() !== year ||
+        inputDate.getMonth() !== (month - 1) ||
+        inputDate.getDate() !== day
+      ){
+        showDateError();
+        return;
+      }
+
+      
+      const newYearDate = new Date(year, 11, 31);
+
+      
+      const msInDay = 1000 * 60 * 60 * 24;
+      const diffMs  = newYearDate - inputDate;
+      const diffDays = Math.ceil(diffMs / msInDay);
+
+      daysDiv.textContent = `Дней до Нового года: ${diffDays}`;
+
+      // проверка на високосный
+      leapDiv.textContent = isLeapYear(year) ? "Год високосный" : "Год не високосный";
+    }
+  </script>
 </body>
 </html>
