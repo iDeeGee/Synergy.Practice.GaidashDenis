@@ -1,5 +1,5 @@
 def sum_and_count_positive(arr):
-    """Функция подсчёта суммы и кол-ва полож.элементов."""
+    """Функция для подсчёта суммы и кол-ва полож.элементов."""
     sum_pos = 0
     count_pos = 0
     
@@ -21,7 +21,7 @@ def input_array():
                 continue
             break
         except ValueError:
-            print("Ошибка! Введите целое число для размерности!.\n")
+            print("Ошибка! Введите целое число.\n")
     
     while True:
         try:
