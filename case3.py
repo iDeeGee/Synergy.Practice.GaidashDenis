@@ -5,6 +5,7 @@ import threading
 stop_flag = False  # Флаг для остановки генерации
 
 def input_thread():
+    """Функция для отслеживания ввода 0 от пользователя"""
     global stop_flag
     while True:
         user_input = input()
@@ -13,6 +14,7 @@ def input_thread():
             break
 
 def generate_numbers():
+    """Функция для генерации и вывода списка чисел"""
     global stop_flag
     print("---" * 18)
     print("Для остановки генерации, введите 0 и нажмите Enter")
