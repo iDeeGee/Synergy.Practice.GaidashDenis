@@ -35,7 +35,7 @@
 ## Запуск
 1. Перейти по ссылке в репозиторий:
 https://github.com/iDeeGee/Synergy.Practice.GaidashDenis/blob/main/case4.html
-2. В нажать на пиктограмму ![alt text](chrome_1ckjT3I1nf.png) "Download raw file"
+2. Нажать на пиктограмму ![alt text](chrome_1ckjT3I1nf.png) "Download raw file"
 3. Выбрать место на локальном диске, для сохранения файла.
 4. Запустить файл case4.html
 
