@@ -1,3 +1,4 @@
+# Код доступен на github: https://github.com/iDeeGee/Synergy.Practice.GaidashDenis/blob/main/case2_user_input.py
 def count_and_product_greater(arr, B):
     """Функиция для поиска больше B и их произведение."""
     count = 0

@@ -1,3 +1,4 @@
+# Код доступен на github: https://github.com/iDeeGee/Synergy.Practice.GaidashDenis/blob/main/case3.py
 import random
 import time
 import threading

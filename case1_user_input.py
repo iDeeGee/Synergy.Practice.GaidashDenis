@@ -1,3 +1,4 @@
+# Код доступен на github: https://github.com/iDeeGee/Synergy.Practice.GaidashDenis/blob/main/case1_user_input.py
 def sum_and_count_positive(arr):
     """Функция для подсчёта суммы и кол-ва полож.элементов."""
     sum_pos = 0
